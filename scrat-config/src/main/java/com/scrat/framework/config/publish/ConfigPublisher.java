@@ -38,14 +38,11 @@ public class ConfigPublisher {
         init();
     }
 
-    /**
-     * 获取ConfigPublisher实例
-     *
-     * @return ConfigPublisher实例
-     *
-     * @author zhangshaobin
-     * @created 2013-6-26 上午10:55:04
-     */
+   /**
+    * 描述：获取ConfigPublisher实例
+    * 作者 ：kangzz
+    * 日期 ：2016-10-26 20:22:38
+    */
     public static synchronized ConfigPublisher getInstance() {
         if (null != pub) return pub;
         pub = new ConfigPublisher();
@@ -53,10 +50,9 @@ public class ConfigPublisher {
     }
 
     /**
-     * 初始化
-     *
-     * @author zhangshaobin
-     * @created 2013-6-26 上午10:55:30
+     * 描述：初始化
+     * 作者 ：kangzz
+     * 日期 ：2016-10-26 20:22:52
      */
     private void init() {
         zkConfigRootPath = DynamicPropertyFactory.getInstance().getStringProperty(ZK_ROOT_PATH_KEY, "/AsuraConfig").get();
@@ -104,17 +100,9 @@ public class ConfigPublisher {
     }
 
     /**
-     * 增加配置信息
-     *
-     * @param type
-     *         配置信息类型
-     * @param code
-     *         配置信息编码
-     * @param data
-     *         配置信息值
-     *
-     * @author zhangshaobin
-     * @created 2013-6-27 下午3:04:08
+     * 描述：增加配置信息
+     * 作者 ：kangzz
+     * 日期 ：2016-10-26 20:23:14
      */
     public void setConfig(String type, String code, String data) {
         String path = zkConfigRootPath + "/" + type + "/" + code;
@@ -130,15 +118,9 @@ public class ConfigPublisher {
     }
 
     /**
-     * 删除配置信息
-     *
-     * @param type
-     *         配置信息类型
-     * @param code
-     *         配置信息编码
-     *
-     * @author zhangshaobin
-     * @created 2013-6-27 下午3:04:23
+     * 描述：删除配置信息
+     * 作者 ：kangzz
+     * 日期 ：2016-10-26 20:23:26
      */
     public void deleteConfig(String type, String code) {
         String path = zkConfigRootPath + "/" + type + "/" + code;
@@ -152,7 +134,7 @@ public class ConfigPublisher {
     }
 
     /**
-     * 从zookeeper上获取配置信息
+     * 描述： 从zookeeper上获取配置信息
      *
      * @param type
      *         配置信息类型
@@ -160,9 +142,8 @@ public class ConfigPublisher {
      *         配置信息编码
      *
      * @return 配置信息值
-     *
-     * @author zhangshaobin
-     * @created 2013-6-28 下午1:56:52
+     * 作者 ：kangzz
+     * 日期 ：2016-10-26 20:23:43
      */
     public String getConfigValue(String type, String code) {
         String path = zkConfigRootPath + "/" + type + "/" + code;
