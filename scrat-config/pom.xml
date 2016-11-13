@@ -171,7 +171,7 @@
                                     <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
                                 </manifest>
                             </archive>
-                            <finalName>com-asura-framework-publish-${version}</finalName>
+                            <finalName>com-kangzz-framework-publish-${version}</finalName>
                             <includes>
                                 <include>**/publish/*.class</include>
                                 <include>**/common/*.class</include>
@@ -194,7 +194,7 @@
                                     <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
                                 </manifest>
                             </archive>
-                            <finalName>com-asura-framework-subscribe-${version}</finalName>
+                            <finalName>com-kangzz-framework-subscribe-${version}</finalName>
                             <includes>
                                 <include>**/subscribe/*.class</include>
                                 <include>**/common/*.class</include>
@@ -215,10 +215,10 @@
                             <goal>install-file</goal>
                         </goals>
                         <configuration>
-                            <file>target/com-asura-framework-publish-${version}.jar</file>
+                            <file>target/com-scrat-framework-publish-${version}.jar</file>
                             <repositoryLayout>default</repositoryLayout>
-                            <groupId>com.asura</groupId>
-                            <artifactId>com-asura-framework-publish</artifactId>
+                            <groupId>com.scrat</groupId>
+                            <artifactId>com-scrat-framework-publish</artifactId>
                             <version>${version}</version>
                             <packaging>jar</packaging>
                         </configuration>
@@ -230,10 +230,10 @@
                             <goal>install-file</goal>
                         </goals>
                         <configuration>
-                            <file>target/com-asura-framework-subscribe-${version}.jar</file>
+                            <file>target/com-scrat-framework-subscribe-${version}.jar</file>
                             <repositoryLayout>default</repositoryLayout>
-                            <groupId>com.asura</groupId>
-                            <artifactId>com-asura-framework-subscribe</artifactId>
+                            <groupId>com.scrat</groupId>
+                            <artifactId>com-scrat-framework-subscribe</artifactId>
                             <version>${version}</version>
                             <packaging>jar</packaging>
                         </configuration>
@@ -255,11 +255,11 @@
                             <goal>deploy-file</goal>
                         </goals>
                         <configuration>
-                            <file>target/com-asura-framework-subscribe-${version}.jar</file>
+                            <file>target/com-scrat-framework-subscribe-${version}.jar</file>
                             <repositoryId>${repository.id}</repositoryId>
                             <url>${repository.url}</url>
-                            <groupId>com.asura</groupId>
-                            <artifactId>com-asura-framework-subscribe</artifactId>
+                            <groupId>com.scrat</groupId>
+                            <artifactId>com-scrat-framework-subscribe</artifactId>
                             <version>${version}</version>
                             <packaging>jar</packaging>
                         </configuration>
@@ -271,11 +271,11 @@
                             <goal>deploy-file</goal>
                         </goals>
                         <configuration>
-                            <file>target/com-asura-framework-publish-${version}.jar</file>
+                            <file>target/com-scrat-framework-publish-${version}.jar</file>
                             <repositoryId>${repository.id}</repositoryId>
                             <url>${repository.url}</url>
-                            <groupId>com.asura</groupId>
-                            <artifactId>com-asura-framework-publish</artifactId>
+                            <groupId>com.scrat</groupId>
+                            <artifactId>com-scrat-framework-publish</artifactId>
                             <version>${version}</version>
                             <packaging>jar</packaging>
                         </configuration>
