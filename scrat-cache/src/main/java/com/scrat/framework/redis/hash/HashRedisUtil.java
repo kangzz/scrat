@@ -25,7 +25,7 @@ public class HashRedisUtil {
 
     private JedisPool[] jedisPools = new JedisPool[0];
 
-    private static final HashRedisUtil INSTANCE = new HashRedisUtil();
+    private static HashRedisUtil INSTANCE = null;;
 
     private HashRedisUtil() {
         initPool();
@@ -71,7 +71,14 @@ public class HashRedisUtil {
         jedisPools = jedisPoolList.toArray(jedisPools);
     }
 
-    public static HashRedisUtil getInstance() {
+    public static  HashRedisUtil getInstance() {
+        if(INSTANCE == null){
+            synchronized(HashRedisUtil.class) {
+                if(INSTANCE == null){
+                    INSTANCE = new HashRedisUtil();
+                }
+            }
+        }
         return INSTANCE;
     }
 

@@ -28,7 +28,7 @@ public class ShardedRedisUtil {
 
     private ShardedJedisPool shardedJedisPool = null;
 
-    private static final ShardedRedisUtil INSTANCE = new ShardedRedisUtil();
+    private static ShardedRedisUtil INSTANCE = null;
 
     private ShardedRedisUtil() {
         initialShardedPool();
@@ -76,6 +76,13 @@ public class ShardedRedisUtil {
     }
 
     public static ShardedRedisUtil getInstance() {
+        if(INSTANCE == null){
+            synchronized(ShardedRedisUtil.class) {
+                if(INSTANCE == null){
+                    INSTANCE = new ShardedRedisUtil();
+                }
+            }
+        }
         return INSTANCE;
     }
 
