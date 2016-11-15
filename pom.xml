@@ -11,6 +11,8 @@
     <modules>
         <module>scrat-cache</module>
         <module>scrat-config</module>
+        <module>scrat-log</module>
+        <module>scrat-mongo</module>
     </modules>
 
 
