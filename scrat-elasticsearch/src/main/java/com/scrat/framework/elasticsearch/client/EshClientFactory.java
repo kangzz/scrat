@@ -1,6 +1,7 @@
 package com.scrat.framework.elasticsearch.client;
 
 import com.google.common.base.Preconditions;
+import com.netflix.config.DynamicPropertyFactory;
 import org.apache.commons.lang.StringUtils;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.settings.Settings;
@@ -35,54 +36,40 @@ public class EshClientFactory {
     private static String clusterName;
 
     // IP地址、端口
-    private String[] addresses;
+    private static String[] addresses;
 
     // 环境信息
-    private String env;
+    private static String env;
 
-    private TransportClient esClient;//ES 客户端对象
+    private static TransportClient esClient;//ES 客户端对象
 
-    /**
-     * ES 客户端连接初始化
-     *
-     * @return ES客户端对象
-     */
-    private void init() {
+    static {
         try {
             clusterName= ElasticsearchConfig.getConfigProperty(EsClientConfig.ELASTICSEARCH_CLUSTER_NAME);
             String strAddresses= ElasticsearchConfig.getConfigProperty(EsClientConfig.ELASTICSEARCH_ADDRESSES);
             addresses=strAddresses.split(",");
             sniff= Boolean.parseBoolean(ElasticsearchConfig.getConfigProperty(EsClientConfig.ELASTICSEARCH_TRANSPORT_SNIFF));
             env = ElasticsearchConfig.getConfigProperty(EsClientConfig.ELASTICSEARCH_ENV);
+
+            //判断配置
+            Preconditions.checkNotNull(clusterName, "es 服务clusterName未配置");
+            Preconditions.checkNotNull(addresses, "es 服务ip未配置");
+            //Preconditions.checkArgument(esPort > 0, "es 服务服务port未配置");
+            //设置集群的名字
+            Settings settings = Settings.settingsBuilder().put("client.node", true).put("cluster.name", clusterName).put("client.transport.sniff", sniff).build();
+            //Settings settings = Settings.settingsBuilder().put("client.transport.sniff", sniff).build();
+            //创建集群client并添加集群节点地址
+            esClient = TransportClient.builder().settings(settings).build();
+            for (String address : addresses) {
+                String[] inetAddress = address.split(":");
+                esClient.addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName(inetAddress[0]), new Integer(inetAddress[1])));
+            }
         }catch (Exception e){
             LOGGER.error("加载配置异常",e);
         }
     }
 
-    public TransportClient getClient()   {
-        if (esClient == null) {
-            synchronized (this) {
-                if (esClient == null) {
-                    try {
-                        //判断配置
-                        Preconditions.checkNotNull(clusterName, "es 服务clusterName未配置");
-                        Preconditions.checkNotNull(addresses, "es 服务ip未配置");
-                        //Preconditions.checkArgument(esPort > 0, "es 服务服务port未配置");
-                        //设置集群的名字
-                        Settings settings = Settings.settingsBuilder().put("client.node", true).put("cluster.name", clusterName).put("client.transport.sniff", sniff).build();
-                        //Settings settings = Settings.settingsBuilder().put("client.transport.sniff", sniff).build();
-                        //创建集群client并添加集群节点地址
-                        esClient = TransportClient.builder().settings(settings).build();
-                        for (String address : addresses) {
-                            String[] inetAddress = address.split(":");
-                            esClient.addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName(inetAddress[0]), new Integer(inetAddress[1])));
-                        }
-                      }catch (Exception e){
-                         LOGGER.error("客户端连接初始化异常",e);
-                    }
-                }
-            }
-        }
+    public static TransportClient getClient(){
         return esClient;
     }
 
@@ -91,14 +78,14 @@ public class EshClientFactory {
      * @param indexName
      * @return String
      */
-    public String getIndexs(String indexName){
+    public static String getIndexs(String indexName){
         if (StringUtils.isBlank(env)) {
             return indexName;
         }
         return indexName + "_" + env;
     }
 
-    public String[] getIndexs(String... indexNames){
+    public static String[] getIndexs(String... indexNames){
         if (StringUtils.isBlank(env)) {
             return indexNames;
         }
