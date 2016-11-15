@@ -1,7 +1,6 @@
 package com.scrat.framework.elasticsearch.client;
 
 import com.google.common.base.Preconditions;
-import com.netflix.config.DynamicPropertyFactory;
 import org.apache.commons.lang.StringUtils;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.settings.Settings;
@@ -10,20 +9,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.net.InetAddress;
-
 /**
- * <p></p>
- *
- * <PRE>
- * <BR>	修改记录
- * <BR>-----------------------------------------------
- * <BR>	修改日期			修改人			修改内容
- * </PRE>
- *
- * @author jiangn18
- * @version 1.0
- * @date 2016/8/29 17:02
- * @since 1.0
+ * 描述：工厂
+ * 作者 ：kangzz
+ * 日期 ：2016-11-15 22:47:06
  */
 public class EshClientFactory {
 
