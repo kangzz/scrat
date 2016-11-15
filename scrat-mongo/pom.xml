@@ -49,8 +49,7 @@
                             </archive>
                             <finalName>com-scrat-framework-mongoDB-${project.version}</finalName>
                             <includes>
-                                <include>**/mongoConfig/**/*.class</include>
-                                <include>**/utils/**/*.class</include>
+                                <include>**/*.class</include>
                             </includes>
                         </configuration>
                     </execution>

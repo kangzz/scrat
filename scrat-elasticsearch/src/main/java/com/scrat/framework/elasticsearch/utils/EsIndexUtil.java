@@ -23,6 +23,9 @@ import java.util.Map;
  */
 public class EsIndexUtil {
 
+    private EsIndexUtil(){
+
+    }
     private static Logger logger = LoggerFactory.getLogger(EsIndexUtil.class);
     /**
      * 创建索引
