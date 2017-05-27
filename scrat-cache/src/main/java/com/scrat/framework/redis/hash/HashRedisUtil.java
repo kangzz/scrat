@@ -25,7 +25,7 @@ public class HashRedisUtil {
 
     private JedisPool[] jedisPools = new JedisPool[0];
 
-    private static HashRedisUtil INSTANCE = null;;
+    private static volatile HashRedisUtil INSTANCE = null;;
 
     private HashRedisUtil() {
         initPool();
