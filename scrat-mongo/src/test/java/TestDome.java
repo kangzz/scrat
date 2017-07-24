@@ -53,11 +53,17 @@ public class TestDome {
 
         String id = "582ac1a3093e5e0f77f301a7";
         Document doc = MongoDBUtil.instance.findById(coll, id);
-        System.out.println(doc.toJson());
+        System.out.println("before.update"+doc.toJson());
 
         Person person = MongoDBUtil.instance.findById(coll, id,Person.class);
+        Document document = new Document();
 
+        document.put("name", "update.name");
 
+        MongoDBUtil.instance.updateById(coll,id,document);
+
+        Document docUpdate = MongoDBUtil.instance.findById(coll, id);
+        System.out.println("after.update"+docUpdate.toJson());
         //System.out.println(JSONObject.toJSONString(person)+"--"+person.get_id().toString());
         // // 根据ID查询
         // String id = "556925f34711371df0ddfd4b";
